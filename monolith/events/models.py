@@ -21,6 +21,8 @@ class State(models.Model):
     class Meta:
         ordering = ("abbreviation",)  # Default ordering for State
 
+# State.objects.order_by('state_name').asc()
+
 
 class Location(models.Model):
     """
