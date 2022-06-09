@@ -17,6 +17,29 @@ function createCard(name, description, pictureUrl, start, end, location) {
 
 // <div class="card shadow p-3 ms-5 bg-body rounded">
 
+
+function placeholderCard() {
+  return `
+    <div class="card" id="placeholder" aria-hidden="true">
+    <img src="" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title placeholder-glow">
+        <span class="placeholder col-4"></span>
+      </h5>
+      <p class="card-text placeholder-glow">
+        <span class="placeholder col-7"></span
+        <span class="placeholder col-4"></span
+        <span class="placeholder col-4"></span
+        <span class="placeholder col-6"></span
+        <span class="placeholder col-8"></span
+      </p>
+      <a href="#" tabindex="-1" class="btn btn-primary disabled placeholder col-4" aria-hidden="true"></a>
+    </div>
+  </div>
+  <br>
+  `
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
 
   const url = 'http://localhost:8000/api/conferences/';
@@ -25,22 +48,31 @@ window.addEventListener('DOMContentLoaded', async () => {
     const response = await fetch(url);
 
     if (!response.ok) {
-      // Figure out what to do when the response is bad
-      throw new Error('Response is not okay')
+      const container = document.querySelector(`.container`)
+      container.innerHTML = `
+      <div class="alert alert-warning d-flex align-items>
+      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-hidden></svg>
+      <div>API loaded but did not process. Check console for error. </div>
+      </div>
+      `
     } else {
       const data = await response.json();
-      console.log(data)
       let i = 0
-
       for (let conference of data.conferences) {
         i += 1 
-        console.log('hello')
+        const column = document.querySelector(`#col${i}`)
+        column.innerHTML += placeholderCard()
+
+        let placeholder = document.getElementById(`placeholder`)
+        // console.log('placeholder', placeholder)
+
         const detailUrl = `http://localhost:8000${conference.href}`;
         const detailResponse = await fetch(detailUrl);
         // console.log(detailResponse)
+
         if (detailResponse.ok) {
           const details = await detailResponse.json();
-          console.log(details.conference)
+          // console.log(details.conference)
           const name = details.conference.name;
           const description = details.conference.description;
           const pictureUrl = details.conference.location.picture_url;
@@ -48,7 +80,8 @@ window.addEventListener('DOMContentLoaded', async () => {
           const start = new Date(details.conference.starts).toDateString()
           const end = new Date(details.conference.ends).toDateString()
           const html = createCard(name, description, pictureUrl, start, end, location);
-          const column = document.querySelector(`#col${i}`)
+          const row = document.querySelector(`.row`)
+          placeholder.remove()
           // console.log(html)
           column.innerHTML += html
           if (i === 3) {
