@@ -9,6 +9,7 @@ import LocationForm from './LocationForm.js';
 import ConferenceForm from './ConferenceForm.js';
 import AttendConferenceForm from './AttendConferenceForm'
 import PresentationForm from './PresentationForm'
+import MainPage from './MainPage.js';
 
 
 import React from 'react'
@@ -21,7 +22,7 @@ function App(props) {
     <BrowserRouter>
       <Nav />
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route index element={<MainPage />} />
         <Route path="/locations/new" element={<LocationForm />} />
         <Route path="/conferences/new" element={<ConferenceForm />} />
         <Route path="/presentations/new" element={<PresentationForm />} />
