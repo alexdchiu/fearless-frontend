@@ -72,7 +72,7 @@ class LocationForm extends React.Component {
     const response = await fetch(url)
     if (response.ok) {
       const data = await response.json()
-      // console.log(data)
+      console.log(data)
       this.setState({states:data.states})
       const selectTag = document.getElementById("state")
       for (let state of data.states) {

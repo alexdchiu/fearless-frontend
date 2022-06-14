@@ -19,7 +19,7 @@ reportWebVitals();
 
 async function loadAttendees() {
   const response = await fetch('http://localhost:8001/api/attendees/')
-  console.log(response)
+  // console.log(response)
   if (response.ok) {
     const data = await response.json()
     root.render(
