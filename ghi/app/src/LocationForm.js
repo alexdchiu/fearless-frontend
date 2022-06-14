@@ -34,7 +34,7 @@ class LocationForm extends React.Component {
     };
     const response = await fetch(locationUrl, fetchConfig);
     if (response.ok) {
-      const newLocation = await response.json();
+      // const newLocation = await response.json();
       // console.log(newLocation);
 
       const cleared = {
@@ -74,13 +74,13 @@ class LocationForm extends React.Component {
       const data = await response.json()
       console.log(data)
       this.setState({states:data.states})
-      const selectTag = document.getElementById("state")
-      for (let state of data.states) {
-        const stateOption = document.createElement('option')
-        stateOption.value = state.abbreviation
-        stateOption.innerHTML = state.name
-        selectTag.appendChild(stateOption)
-      }
+      // const selectTag = document.getElementById("state")
+      // for (let state of data.states) {
+      //   const stateOption = document.createElement('option')
+      //   stateOption.value = state.abbreviation
+      //   stateOption.innerHTML = state.name
+      //   selectTag.appendChild(stateOption)
+      // }
     }
   }
   

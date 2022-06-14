@@ -46,7 +46,7 @@ class ConferenceForm extends React.Component {
     const response = await fetch(locationUrl, fetchConfig);
     if (response.ok) {
       // formTag.reset();
-      const newConference = await response.json();
+      // const newConference = await response.json();
       // console.log("conference", newConference)
 
       const cleared = {
